@@ -40,12 +40,12 @@ Add data visualizations using Plotly in the web app.<br>
 
 
 ### Files
-  * ./app/templates/go.html        web of file display  
-  * ./app/templates/master.html    web of file display  
-  * ./app/templates/run.py         run web of page  <br>
-          | tokenize()             nlp tokenize<br>
-          | index()                index webpage displays cool visuals and receives user input text for model<br>
-          | go()                   web page that handles user query and displays model results<br>
+  * ./app/templates/go.html        &nbsp;web of file display  
+  * ./app/templates/master.html    &nbsp;web of file display  
+  * ./app/templates/run.py&nbsp;&nbsp;&nbsp;run web of page  <br>
+          | tokenize()&nbsp;&nbsp;&nbsp;nlp tokenize<br>
+          | index()&nbsp;&nbsp;&nbsp;index webpage displays cool visuals and receives user input text for model<br>
+          | go()&nbsp;&nbsp;&nbsp;web page that handles user query and displays model results<br>
           | main()                       <br>
   * ./data/categories.csv          categories data  
   * ./data/messages.csv            messages data  
