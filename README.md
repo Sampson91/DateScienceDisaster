@@ -43,13 +43,24 @@ Add data visualizations using Plotly in the web app.<br>
   * ./app/templates/go.html      web of file display  
   * ./app/templates/master.html   web of file display  
   * ./app/templates/run.py   run web of page  <br>
-
+          | tokenize()                 nlp tokenize<br>
+          | index()                    index webpage displays cool visuals and receives user input text for model<br>
+          | go()                       web page that handles user query and displays model results<br>
+          | main()                       <br>
   * ./data/categories.csv   categories data  
   * ./data/messages.csv     messages data  
   * ./data/process_data.py    process categories and messages data and save to SQLite databases   <br>
-
+          | load_data()                
+          | clean_data()
+          | save_data()
+          | main()
   * ./models/train_classifier.py   use pipline build model    <br>
-  
+          | load_data()
+          | tokenize()
+          | build_model()
+          | evaluate_model()
+          | save_model()
+          | main()
   ### Links
   [Nltk](http://www.nltk.org/api/nltk.tokenize.html) <br>
   [Pipeline](http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)<br>
