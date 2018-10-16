@@ -62,6 +62,14 @@ def evaluate_model(model, X_test, Y_test, category_names):
     y_pred = model.predict(X_test)
     print(classification_report(Y_test, y_pred, target_names=category_names))
 
+    test = pd.DataFrame(Y_test, columns=category_names)
+    prediction = pd.DataFrame(y_pred, columns=category_names)
+    print("Accuracy Score")
+    for category in category_names:
+        accuracy = accuracy_score(test[category], prediction[category])
+        print("Accuracy score for {}: {:.3f} ".format(category, accuracy))
+    return
+
 def save_model(model, model_filepath):
     pickle.dump(model, open(model_filepath, 'wb'))
 
