@@ -40,7 +40,7 @@ Add data visualizations using Plotly in the web app.<br>
 
 
 ### Files
-  * ./app/templates/go.html........web of file display  
+  * ./app/templates/go.html .......web of file display  
   * ./app/templates/master.html ...web of file display  
   * ./app/templates/run.py ........run web of page  <br>
           | tokenize() ............nlp tokenize<br>
