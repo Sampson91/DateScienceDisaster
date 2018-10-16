@@ -49,3 +49,8 @@ Add data visualizations using Plotly in the web app.<br>
   * ./data/process_data.py    process categories and messages data and save to SQLite databases   <br>
 
   * ./models/train_classifier.py   use pipline build model    <br>
+  
+  ### Links
+  [Nltk](http://www.nltk.org/api/nltk.tokenize.html) <br>
+  [Pipeline](http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)<br>
+  [MultiOutputClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.multioutput.MultiOutputClassifier.html)
