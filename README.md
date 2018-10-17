@@ -30,7 +30,7 @@ Trains and tunes a model using GridSearchCV<br>
 Outputs results on the test set<br>
 Exports the final model as a pickle file<br>
 #### To run ML pipeline that trains classifier
-#####  python train_classifier.py ../data/categories_table.db ./modelwww.pkl  <br>
+#####  python train_classifier.py  ../data/categories_table.db ./modelwww.pkl  <br>
 
 
 ### 3. Flask Web App
