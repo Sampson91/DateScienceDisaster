@@ -18,7 +18,7 @@ Merges the two datasets<br>
 Cleans the data<br>
 Stores it in a SQLite database <br>
 #### To run ETL pipeline that cleans data
-##### python train_classifier.py '../data/categories_table.db' './modelwww.pkl'
+##### python process_data.py messages.csv categories.csv categories_table.db
 
 ### 2. ML Pipeline
 In a Python script, train_classifier.py, write a machine learning pipeline that:<br>
@@ -30,7 +30,7 @@ Trains and tunes a model using GridSearchCV<br>
 Outputs results on the test set<br>
 Exports the final model as a pickle file<br>
 #### To run ML pipeline that trains classifier
-#####  python train_classifier.py '../data/categories_table.db' './modelwww.pkl'  <br>
+#####  python train_classifier.py ../data/categories_table.db ./modelwww.pkl  <br>
 
 
 ### 3. Flask Web App
