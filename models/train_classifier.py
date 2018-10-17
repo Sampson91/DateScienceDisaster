@@ -6,22 +6,23 @@ import numpy as np
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem.wordnet import WordNetLemmatizer
+from sklearn.base import BaseEstimator, TransformerMixin
 from sqlalchemy import create_engine
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline, FeatureUnion
-
+from sklearn.base import BaseEstimator, TransformerMixin
 # from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer, TfidfTransformer
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import classification_report,accuracy_score
+from sklearn.metrics import classification_report, accuracy_score
 import pickle
+from sklearn.externals import joblib
 
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('wordnet')
-
 
 
 def load_data(database_filepath):
@@ -50,27 +51,27 @@ def build_model():
     ])
     parameters = {
         'vect__ngram_range': ((1, 1), (1, 2)),
-        'vect__max_df': (0.5, 0.75, 1.0),
-        'tfidf__use_idf': (True, False),
+        'tfidf__norm': ['l1', 'l2'],
         'clf__estimator__criterion': ['entropy', 'gini']
     }
     cv = GridSearchCV(pipeline, param_grid=parameters)
-    return (cv)
+    return (pipeline)
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
     y_pred = model.predict(X_test)
     test = pd.DataFrame(Y_test, columns=category_names)
     prediction = pd.DataFrame(y_pred, columns=category_names)
+    print("classification_report")
+    print(classification_report(Y_test, y_pred, target_names=category_names))
     print("Accuracy Score")
     for category in category_names:
         accuracy = accuracy_score(test[category], prediction[category])
         print("Accuracy score for {}: {:.3f} ".format(category, accuracy))
-    print(classification_report(Y_test, y_pred, target_names=category_names))
-    return
+
 
 def save_model(model, model_filepath):
-    pickle.dump(model, open(model_filepath, 'wb'))
+    joblib.dump(model, model_filepath)
 
 
 def main():
@@ -78,20 +79,20 @@ def main():
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
         X, Y, category_names = load_data(database_filepath)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2,random_state=42)
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3)
 
         print('Building model...')
         model = build_model()
 
         print('Training model...')
-        model.fit(X_train, Y_train)
-
-        print('Evaluating model...')
-
-        evaluate_model(model, X_test, Y_test, category_names)
+        model = joblib.load("./modelwww.pkl")
+        #         model.fit(X_train, Y_train)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(model, model_filepath)
+
+        print('Evaluating model...')
+        evaluate_model(model, X_test, Y_test, category_names)
 
         print('Trained model saved!')
 

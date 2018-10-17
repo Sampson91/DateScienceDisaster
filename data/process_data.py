@@ -16,14 +16,16 @@ def clean_data(df):
     row = categories.iloc[0]
     category_colnames = row.apply(lambda x: x.split('-')[0])
     categories.columns = category_colnames
-    for column in categories:
+    for column in category_colnames:
         # set each value to be the last character of the string
-        categories[column] = categories[column].str[-1]
+        categories[column] = pd.to_numeric(categories[column].str[-1])
         # convert column from string to numeric
-        categories[column] = categories[column].convert_objects(convert_numeric=True)
+        #     categories[column] = categories[column].convert_objects(convert_numeric=True)
+        categories[column][categories[column] > 1] = 1
     df = df.drop(['categories'], axis=1)
     df = pd.concat([df, categories], axis=1)
-    df = df.drop_duplicates()
+    df.drop_duplicates(keep='first', inplace=True)
+
     return (df)
 
 
@@ -43,7 +45,7 @@ def main():
 
         print('Cleaning data...')
         df = clean_data(df)
-
+        print(df.shape)
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
         save_data(df, database_filepath)
 
