@@ -85,8 +85,8 @@ def main():
         model = build_model()
 
         print('Training model...')
-        model = joblib.load("./modelwww.pkl")
-        #         model.fit(X_train, Y_train)
+        # model = joblib.load("./modelwww.pkl")
+        model.fit(X_train, Y_train)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(model, model_filepath)
